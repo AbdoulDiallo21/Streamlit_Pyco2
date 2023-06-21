@@ -33,7 +33,7 @@ pydeck==0.8.1b0
 pyecharts==2.0.3
 Pympler==1.0.1
 PyQt5==5.15.7
-pywin32==305.1
+pywin32>=305.1
 PyYAML==6.0
 rich==13.3.5
 seaborn==0.12.2
