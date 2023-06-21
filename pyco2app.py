@@ -11,7 +11,7 @@ from ml_app import run_ml_app
 def main():
     #stc.html(html_titre)
     menu=["Home page","Analyse exploratoire des données","Modelisation", "About"]
-    st.sidebar.image("images/logoPyCo2.png", use_column_width=True, width=400)
+    st.sidebar.image("logoPyCo2.png", use_column_width=True, width=400)
     choice=st.sidebar.selectbox("Menu",menu)
     #Ajout du logo pour les pages en le centrant
     # col1, col2, col3 = st.columns(3)
@@ -33,7 +33,7 @@ def main():
         with col1:
             st.write("")
         with col2:
-            st.image("images/co2.jpg")
+            st.image("co2.jpg")
         with col3:
             st.write("")
         run_ml_app()
