@@ -9,7 +9,7 @@ from ml_app import run_ml_app
 #Structure de l'application
 def main():
     #stc.html(html_titre)
-    menu=["Home page","Analyse exploratoire des données","Modelisation", "About"]
+    menu=["Home page","Analyse exploratoire des données","Modelisation"]
     st.sidebar.image("logoPyCo2.png", use_column_width=True, width=400)
     choice=st.sidebar.selectbox("Menu",menu)
     #Ajout du logo pour les pages en le centrant
@@ -36,8 +36,6 @@ def main():
         with col3:
             st.write("")
         run_ml_app()
-    else:
-        st.subheader("About")
 
 if __name__=='__main__':
     main()
