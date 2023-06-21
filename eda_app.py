@@ -16,7 +16,7 @@ import io
 #     return df
 @st.cache
 def run_eda_app():
-    df = pd.read_csv('data/data_eda.csv', sep = ',',decimal=",", dtype={'index':'str'}, encoding='utf-8')
+    df = pd.read_csv('data_eda.csv', sep = ',',decimal=",", dtype={'index':'str'}, encoding='utf-8')
     for col in df.columns[0:10]:
         df[col]=df[col].astype(str)
     for col in df.columns[10:18]:
@@ -48,9 +48,9 @@ def run_eda_app():
         if st.checkbox("Afficher le dictionnaire des variables"):
             st.markdown(
             """
-            |Nom variable (initial)|Nom variable (récodé)|Libellé|Type|"Pourcentage de données manquantes|
+            |Nom variable (initial)|Nom variable (récodé)|Libellé|Type|Pourcentage de données manquantes|
             | --- | --- | --- |--- |--- |
-            |ID (clé primaire)|idve'|Identifiant | object | 0|
+            |ID (clé primaire)|idve|Identifiant | object | 0|
             |Country| country|Pays| object| 0|
             |VFN|vfn|Numéro d'identification de la famille du véhicule| object| 10|
             |Mp|mp|Mutualisation des constructeurs|object | 3|
