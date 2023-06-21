@@ -27,7 +27,7 @@ def main():
         run_home_app()
     elif choice=="Analyse exploratoire des données":
         run_eda_app()
-    elif choice=="Modelisation":
+    else choice=="Modelisation":
         col1, col2, col3 = st.columns(3)
         with col1:
             st.write("")
