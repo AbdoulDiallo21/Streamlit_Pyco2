@@ -6,7 +6,6 @@ from home_app import run_home_app
 from eda_app import run_eda_app
 from ml_app import run_ml_app
 
-
 #Structure de l'application
 def main():
     #stc.html(html_titre)
