@@ -24,6 +24,12 @@ html_descr = """
 def run_home_app():
     #stc.html(html_titre)
    # st.subheader("Home")
+    st.markdown("""
+    - Abdoul Diallo
+    - Herbaut Shirley
+    - Diarra Boubacar
+    #### Formation continue 2022-2023 / Datascientest
+    """)
     st.markdown("### Description du projet")
     st.markdown(html_descr, unsafe_allow_html=True)
     st.markdown("### Vous pouvez sélectionner sur le menu de gauche :")
