@@ -29,9 +29,9 @@ def run_ml_app():
     add_selectbox = st.sidebar.selectbox("type",("Valeurs", "load data"))
 
     # Chargement de chaque modèle et prédiction des émissions de co2 sur l'ensemble des données
-    best_rforestreg=load('modeles/best_rfreg.joblib')
-    best_gbreg=load('modeles/best_gbreg.joblib')
-    best_knnreg=load('modeles/best_knn_reg.joblib')
+    best_rforestreg=load('best_rfreg.joblib')
+    best_gbreg=load('best_gbreg.joblib')
+    best_knnreg=load('best_knn_reg.joblib')
     
     if add_selectbox == 'Valeurs':
         col1, col2 = st.columns(2)
@@ -139,8 +139,8 @@ def run_ml_app():
                 st.dataframe(df_output.style.highlight_min(axis=0))
                 st.write("Dans ce tableau, les faibles prédictions sont en jaune.")
             with col2:
-                st.markdown("**Vignette CO2**")
-                st.image("images/vignette.jpg")
+                st.markdown("**Vignette Ecolabel CO2**")
+                st.image("vignette.jpg")
 
             
     if add_selectbox == "load data":
@@ -206,10 +206,10 @@ def run_ml_app():
                     #Ajout ecart type ou histogramme
                     st.markdown("**Prédictions de CO2 par les trois modèles**")
                     st.dataframe(preds.style.highlight_min(axis=0))
-                    st.write("Dans ce tableau, les faibles valeurs sont en jaune.")
+                    st.write("Dans ce tableau, les valeurs faibles sont en jaune.")
                 with col2:
-                    st.markdown("**Vignette CO2**")
-                    st.image("images/vignette.jpg")
+                    st.markdown("**Vignette Ecolabel CO2**")
+                    st.image("vignette.jpg")
 
             st.markdown("***")
             if st.checkbox("Taux de prediction"):
