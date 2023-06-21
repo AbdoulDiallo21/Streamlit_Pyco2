@@ -12,8 +12,6 @@ GitPython==3.1.31
 joblib==1.2.0
 llvmlite==0.40.0
 matplotlib==3.7.1
-matplotlib-base==3.7.1
-matplotlib-inline==0.1.6
 markdown-it-py==2.2.0
 mdurl==0.1.2
 memory-profiler==0.61.0
@@ -24,7 +22,7 @@ numba==0.57.0
 numpy==1.24.0
 patsy==0.5.3
 Pillow==9.4.0
-pip==23.0.1
+pip>=23.0.1
 pandas==1.5.3
 ply==3.11
 plotly==5.9.0
