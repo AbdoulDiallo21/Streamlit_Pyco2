@@ -10,7 +10,6 @@ import altair as alt
 import io
 
 #Charger les données
-
 # def load_data(data):
 #     df=pd.read_csv(data, sep=",")
 #     return df
@@ -26,9 +25,7 @@ def run_eda_app():
     df['nom_carburant']=df['carbu']
     vcarbu=(2.0,3.0,4.0,5.0,6.0,7.0,8.0)
     ncarbu=('NG-NGBM-HDG','LPG','ESSENCE/ELECTRIC','DIESEL/ELECTRIC','SUPERETHANOL-E85','ESSENCE','DIESEL')
-
     df['nom_carburant']=df['nom_carburant'].replace(vcarbu,ncarbu)
-
     #Ajout de la variable
     df['all']='all'
 
