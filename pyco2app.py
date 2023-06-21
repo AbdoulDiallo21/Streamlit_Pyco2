@@ -18,7 +18,7 @@ def main():
     # with col1:
     #     st.write("")
     # with col2:
-    #     st.image("images/logoPyCo2.png")
+    #     st.image("logoPyCo2.png")
     # with col3:
     #     st.write("")
     st.markdown("***")
