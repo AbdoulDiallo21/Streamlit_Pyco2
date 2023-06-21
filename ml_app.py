@@ -20,7 +20,7 @@ import shap
 from streamlit_shap import st_shap
 from streamlit_echarts import st_echarts
 #shap.initjs()
-from IPython.display import display
+#from IPython.display import display
 
 
 def run_ml_app():
