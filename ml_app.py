@@ -27,7 +27,6 @@ def run_ml_app():
     st.subheader("Modèles")
     st.write("Test des trois meilleurs modèles")
     add_selectbox = st.sidebar.selectbox("type",("Valeurs", "load data"))
-
     # Chargement de chaque modèle et prédiction des émissions de co2 sur l'ensemble des données
     best_rforestreg=load('best_rfreg.joblib')
     best_gbreg=load('best_gbreg.joblib')
@@ -35,7 +34,6 @@ def run_ml_app():
     
     if add_selectbox == 'Valeurs':
         col1, col2 = st.columns(2)
-
         fueltype = col1.selectbox('Choisir le type de carburant', ['NG','NGBM','HDG','LPG','ESSENCE\ELECTRIC','DIESEL\ELECTRIC','SUPERETHANOL-E85','ESSENCE','DIESEL'])
         consofuel = col2.slider('Consommation de fuel (litre / 100 km)', 0, 20, 6, step=1)
         epkw = col1.slider('Puissance électrique en KW', 0, 1000,100, step=10)
