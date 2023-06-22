@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import altair as alt
-import io
+#import io
 
 #Charger les données
 def load_data(data):
