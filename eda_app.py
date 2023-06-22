@@ -10,10 +10,10 @@ import altair as alt
 import io
 
 #Charger les données
-# def load_data(data):
-#     df=pd.read_csv(data, sep=",")
-#     return df
-@st.cache
+def load_data(data):
+    df=pd.read_csv(data, sep=",")
+    return df
+#@st.cache
 def run_eda_app():
     df = pd.read_csv('data_eda.csv', sep = ',',decimal=",", dtype={'index':'str'}, encoding='utf-8')
     for col in df.columns[0:10]:
@@ -28,12 +28,10 @@ def run_eda_app():
     df['nom_carburant']=df['nom_carburant'].replace(vcarbu,ncarbu)
     #Ajout de la variable
     df['all']='all'
-
+    
     #df=load_data("data/dfco2_eu_2019.csv")
     #Ajout sous menu
-    
     submenu = st.sidebar.selectbox("Exploration", ["Présentation des données","Statistiques et Visualisation"])
-    
     html_descr_table ="""
         <p>Ce jeu de données contient les émissions de CO2 des véhicules imatriculés en europe en 2019 ainsi les caractéristiques techniques.Il est téléchargeable sur le site d'European Envronnment Agency depuis ce lien
         <a href="https://www.eea.europa.eu/data-and-maps/data/co2-cars-emission-20", target="_blank">https://www.eea.europa.eu/data-and-maps/data/co2-cars-emission-20</a></p>
@@ -41,7 +39,6 @@ def run_eda_app():
     if submenu == "Présentation des données":
         st.markdown("### Présentation du jeu de données")
         st.markdown(html_descr_table,unsafe_allow_html=True)
-        
         if st.checkbox("Afficher le dictionnaire des variables"):
             st.markdown(
             """
@@ -93,7 +90,6 @@ def run_eda_app():
             st.dataframe(df.head())
             st.markdown("**Affichage des cinq dernières observations**")
             st.dataframe(df.tail())
-
             col1, col2=st.columns([1,2])
             with col1:
                 st.markdown("**Nombre de valeurs uniques par variable**")
@@ -103,16 +99,13 @@ def run_eda_app():
                 df.info(buf=buffer)
                 infos= buffer.getvalue()
                 st.markdown("**Informations sur les données**")
-                st.text(infos)
-                
+                st.text(infos)    
             st.markdown("**Résumé statistique des variables numériques**")
             st.dataframe(df.select_dtypes(include=float).describe())
             st.markdown("**Résumé statistique des variables catégorielles**")
             st.dataframe(df.select_dtypes(include=object).describe())
         st.markdown("***")
-
         st.markdown("### Sélectionner les variables à croiser:")
-        
         if st.checkbox("Construire vos graphiques"):
                 st.text("ici, vous pouvez construire les graphiques que vous souhaitez afficher")
                 st.warning("🔥, Vous devez renseigner tous les champs pour la construction des graphiques")
@@ -122,7 +115,6 @@ def run_eda_app():
                 df_select=df[df[selected_var].isin(selected_z_var)]
                 selected_x_var = st.selectbox('Choisir la variable x',list(df.columns[10:18]))
                 selected_y_var = st.selectbox('Choisir la variable y', list(df.columns[10:18]))
-    
                 if st.checkbox("Afficher le nuage de points"):
                     alt_chart = (
                     alt.Chart(df_select,title=f"Nuage de points de {selected_x_var} et {selected_y_var} selon {selected_var}")
