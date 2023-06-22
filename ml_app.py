@@ -137,9 +137,7 @@ def run_ml_app():
                 st.markdown("**Vignette Ecolabel CO2**")
                 st.image("vignette.jpg")
 
-            
     if add_selectbox == "load data":
-
         file_upload = st.file_uploader("Upload csv file for predictions", type=["csv"])
 
         if file_upload is not None:
