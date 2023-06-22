@@ -22,7 +22,11 @@ from streamlit_echarts import st_echarts
 
 def run_ml_app():
     st.subheader("Modèles")
-    st.write("Test des trois meilleurs modèles")
+    st.markdown("**Test des meilleurs modèles**")
+    st.markdown(""""
+    Nous n'avaons pas pu charger notre meilleur modèle Knn regressor car il est impossible de le charger sur github compte
+    tenu de taille qui dépasse 25MB. Cependant les modèles déployés ici sont très proches en terme de perfomance à celui de Knn.
+    """)
     add_selectbox = st.sidebar.selectbox("type",("Valeurs", "load data"))
     # Chargement de chaque modèle et prédiction des émissions de co2 sur l'ensemble des données
     best_rforestreg=load('best_rfreg.joblib')
