@@ -14,7 +14,7 @@ def load_data(data):
     return df
 #@st.cache
 def run_eda_app():
-    df = pd.read_csv('data_eda.csv', sep = ',',decimal=",", dtype={'index':'str'}, col_index=0, encoding='utf-8')
+    df = pd.read_csv('data_eda.csv', sep = ',',decimal=",", dtype={'index':'str'}, index_col=0, encoding='utf-8')
     for col in df.columns[0:10]:
         df[col]=df[col].astype(str)
     for col in df.columns[10:18]:
