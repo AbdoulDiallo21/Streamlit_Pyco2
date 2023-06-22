@@ -39,7 +39,6 @@ def run_ml_app():
         at1mm = col2.slider('Largeur de voie en millimètre', 100, 3000, 500,step=100)
         electricrge = col1.slider('Autonomie électrique en KM', min_value = 0.0, max_value = 500.0)
 
-
         input_dict = {'fueltype' : fueltype, 'consofuel' : consofuel, 'electricrge':electricrge,'mskg' : mskg, 'at1mm' : at1mm, 'eccm3' : eccm3, 'epkw' : epkw}
         input_df = pd.DataFrame([input_dict])
         
@@ -120,8 +119,9 @@ def run_ml_app():
         if st.button("Predict"):
             ypred_rfr= best_rforestreg.predict(feats)
             ypred_gbr= best_gbreg.predict(feats)
-            ypred_knn= best_knnreg.predict(feats)
-            output_dict={'RFR':ypred_rfr,'GBR':ypred_gbr,'KNN':ypred_knn}
+            #ypred_knn= best_knnreg.predict(feats)
+            #output_dict={'RFR':ypred_rfr,'GBR':ypred_gbr,'KNN':ypred_knn}
+            output_dict={'RFR':ypred_rfr,'GBR':ypred_gbr}
             df_output=pd.DataFrame(output_dict)
             df_output=pd.melt(df_output, var_name='Models',value_name='predictions')
             df_output.index=df_output['Models']
@@ -167,10 +167,10 @@ def run_ml_app():
             feats.columns=dataselect.columns
             ypred_rfr= best_rforestreg.predict(feats)
             ypred_gbr= best_gbreg.predict(feats)
-            ypred_knn= best_knnreg.predict(feats)
-            output_dict2={'RFR':ypred_rfr,'GBR':ypred_gbr,'KNN':ypred_knn}
+            #ypred_knn= best_knnreg.predict(feats)
+            #output_dict2={'RFR':ypred_rfr,'GBR':ypred_gbr,'KNN':ypred_knn}
+            output_dict2={'RFR':ypred_rfr,'GBR':ypred_gbr}
             predictions=pd.DataFrame(output_dict2)
-            
             #Ajout Critère label aux prédictions
             def eti(x):
                 if 0 < x <= 100:
@@ -210,7 +210,7 @@ def run_ml_app():
 
                 predictions['RFR_VIGNETTE'] = predictions['RFR'].apply(eti)
                 predictions['GBR_VIGNETTE'] = predictions['GBR'].apply(eti)
-                predictions['KNN_VIGNETTE'] = predictions['KNN'].apply(eti)
+                #predictions['KNN_VIGNETTE'] = predictions['KNN'].apply(eti)
 
                 t12=pd.crosstab(predictions['RFR_VIGNETTE'],predictions['GBR_VIGNETTE'],
                     rownames=['RFR'], colnames=['GBR'])
@@ -228,24 +228,21 @@ def run_ml_app():
                 st.markdown("#### Comparaison des prédictions 2 à 2 des trois modèles")
                 st.markdown(f"**RFR et GBR: :** {tauxpred_rfr_gbr}")
                 
-                t13=pd.crosstab(predictions['RFR_VIGNETTE'],predictions['KNN_VIGNETTE'],
-                    rownames=['RFR'], colnames=['KNN'])
-                t13b=pd.DataFrame(t13.stack()).reset_index()
-                t13b.columns=['RFR','KNN','Nombre']
-                t13b['nb_ident']=t13b[['RFR','KNN','Nombre']].apply(lambda x: calcmetric(*x), axis=1)
-                tauxpred_rfr_knn=t13b['nb_ident'].sum()/len(data)
-                st.markdown(f"**RFR et KNN :** {tauxpred_rfr_knn}")
-
-                t23=pd.crosstab(predictions['GBR_VIGNETTE'],predictions['KNN_VIGNETTE'],
-                    rownames=['GBR'], colnames=['KNN'])
-                t23b=pd.DataFrame(t23.stack()).reset_index()
-                t23b.columns=['GBR','KNN','Nombre']
-                t23b['nb_ident']=t23b[['GBR','KNN','Nombre']].apply(lambda x: calcmetric(*x), axis=1)
-                tauxpred_gbr_knn=t23b['nb_ident'].sum()/len(data)
-                st.markdown(f"**GBR et KNN :** {tauxpred_gbr_knn}")
-
+                # t13=pd.crosstab(predictions['RFR_VIGNETTE'],predictions['KNN_VIGNETTE'],
+                #     rownames=['RFR'], colnames=['KNN'])
+                # t13b=pd.DataFrame(t13.stack()).reset_index()
+                # t13b.columns=['RFR','KNN','Nombre']
+                # t13b['nb_ident']=t13b[['RFR','KNN','Nombre']].apply(lambda x: calcmetric(*x), axis=1)
+                # tauxpred_rfr_knn=t13b['nb_ident'].sum()/len(data)
+                # st.markdown(f"**RFR et KNN :** {tauxpred_rfr_knn}")
+                # t23=pd.crosstab(predictions['GBR_VIGNETTE'],predictions['KNN_VIGNETTE'],
+                #     rownames=['GBR'], colnames=['KNN'])
+                # t23b=pd.DataFrame(t23.stack()).reset_index()
+                # t23b.columns=['GBR','KNN','Nombre']
+                # t23b['nb_ident']=t23b[['GBR','KNN','Nombre']].apply(lambda x: calcmetric(*x), axis=1)
+                # tauxpred_gbr_knn=t23b['nb_ident'].sum()/len(data)
+                # st.markdown(f"**GBR et KNN :** {tauxpred_gbr_knn}")
             st.markdown("***")
-
             if st.checkbox("Interpretabilité des modèles"):
                 st.markdown("""
                 Pour rappel, les modèles de ML sont souvent considéreées comme des boites noires (du plus au moins complexe) et afin de comprendre les résulats issus de ces modèles,
@@ -281,12 +278,10 @@ def run_ml_app():
                 Ce graphique affiche les valeurs SHAP moyennes pour chaque feature, triées par ordre décroissant de leur importance.
                 les variables en haut contribuent plus au modèle que ceux d'en bas, donc elles ont un pouvoir prédictif élévé.
                 """)
-
                 col1, col2, col3=st.columns([2,1,2])
                 with col1:
                     st.markdown("**RandomForest Regressor (RFR)**")
                     st_shap(shap.summary_plot(shap_values_rfr,feats,plot_type="bar", color='green', plot_size=[6,4]))
-                    
                 with col2:
                     st.write("--")
                 with col3:
@@ -332,7 +327,6 @@ def run_ml_app():
                 st_shap(shap.dependence_plot(select_var_dep, shap_values_rfr,feats))
                 st.write("GradientBoostingRegressor")
                 st_shap(shap.dependence_plot(select_var_dep, shap_values_gbr,feats))
-
                 st.markdown("Inteprétabilité locale")
                 st.markdown("""
                 La fonction **shap_force** qui permet d'interpreter localement une observation, dispose de trois valeurs:
