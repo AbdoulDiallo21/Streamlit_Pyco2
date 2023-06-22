@@ -27,7 +27,7 @@ def run_ml_app():
     # Chargement de chaque modèle et prédiction des émissions de co2 sur l'ensemble des données
     best_rforestreg=load('best_rfreg.joblib')
     best_gbreg=load('best_gbreg.joblib')
-    best_knnreg=load('best_knn_reg.joblib')
+    #best_knnreg=load('best_knn_reg.joblib')
     
     if add_selectbox == 'Valeurs':
         col1, col2 = st.columns(2)
