@@ -15,9 +15,9 @@ def load_data(data):
 #@st.cache
 def run_eda_app():
     df = pd.read_csv('data_eda.csv', sep = ',',decimal=",", dtype={'index':'str'}, encoding='utf-8')
-    for col in df.columns[0:10]:
+    for col in df.columns[1:11]:
         df[col]=df[col].astype(str)
-    for col in df.columns[10:18]:
+    for col in df.columns[11:19]:
         df[col]=round(df[col].astype(float),2)
     df=df.rename(columns={'mck':'marque','cr_m1g':'v4x4'})
     df=df.copy()
