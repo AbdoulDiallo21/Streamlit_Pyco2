@@ -36,8 +36,6 @@ def main():
         with col3:
             st.write("")
         run_ml_app()
-    else:
-        pass
 
 if __name__=='__main__':
     main()
